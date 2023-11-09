@@ -25,11 +25,15 @@ Laser identify: The Laser class represents a laser beam in the game. It has attr
 Game board identify: The GameBoard class represents the game board itself. It has methods like place_block and remove_block to add or remove blocks from specific positions on the board, and check_solution to verify if the laser beams hit all target points and solve the level.
 
 ## Solve
-Generate the board and grid for loop
-Shoot laser by iterating through multiple laser steps
-Check if solution is reached
-While loop that repeats steps 2 & 3
-Output results in graphical format
+step1: Generate the board and grid for loop
+
+step2: Shoot laser by iterating through multiple laser steps
+
+step3: Check if solution is reached
+
+step4: While loop that repeats steps 2 & 3
+
+step5: Output results in graphical format
 
 # File organization
 All the codes were written in parts and assembled into the final file then, the file structure could be 
