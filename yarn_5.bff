@@ -1,0 +1,83 @@
+file_path = 'dark_1.bff'
+
+# Define the basic classes first
+
+class Grid:
+    def __init__(self, grid_data):
+        self.grid_data = grid_data
+
+    def __str__(self):
+        return "\n".join(self.grid_data)
+
+class Block:
+    def __init__(self, block_type):
+        self.block_type = block_type
+
+class ReflectBlock(Block):
+    def __init__(self):
+        super().__init__('reflect')
+
+class OpaqueBlock(Block):
+    def __init__(self):
+        super().__init__('opaque')
+
+class RefractBlock(Block):
+    def __init__(self):
+        super().__init__('refract')
+
+class Laser:
+    def __init__(self, position, direction):
+        self.position = position  # Tuple (x, y)
+        self.direction = direction  # Tuple (vx, vy)
+
+class Game:
+    def __init__(self, grid, blocks, lasers, points):
+        self.grid = grid
+        self.blocks = blocks  # List of available blocks
+        self.lasers = lasers  # List of lasers
+        self.points = points  # List of points the lasers need to intersect
+
+# Now we'll define the parser function to read from the .bff file and create a game instance
+def parse_bff(file_path):
+    grid_data = []
+    blocks = {'A': ReflectBlock, 'B': OpaqueBlock, 'C': RefractBlock}
+    available_blocks = []
+    lasers = []
+    points = []
+
+    with open(file_path, 'r') as file:
+        content = file.readlines()
+
+    reading_grid = False
+    for line in content:
+        line = line.strip()
+        if line.startswith('#') or not line:
+            # This is a comment or empty line, skip it
+            continue
+        elif line == 'GRID START':
+            reading_grid = True
+        elif line == 'GRID STOP':
+            reading_grid = False
+        elif reading_grid:
+            grid_data.append(line)
+        elif line in blocks:
+            # This line indicates the number of a specific type of block
+            block_type, count = line.split()
+            available_blocks.extend([blocks[block_type]() for _ in range(int(count))])
+        elif line.startswith('L'):
+            # This line defines a laser
+            _, x, y, vx, vy = line.split()
+            lasers.append(Laser((int(x), int(y)), (int(vx), int(vy))))
+        elif line.startswith('P'):
+            # This line defines a point
+            _, x, y = line.split()
+            points.append((int(x), int(y)))
+
+    grid = Grid(grid_data)
+    game = Game(grid, available_blocks, lasers, points)
+    return game
+
+# Test the parsing function with one of the files
+game_instance = parse_bff(file_path)
+print(game_instance.grid)  # For now, just to check if the grid is read correctly
+
