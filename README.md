@@ -13,7 +13,9 @@ Laser Behavior: The laser beams emitted from specific points on the grid travel 
 # Methodology
 ## Read bff file 
 Open the .bff file using the open() function, specifying the file path and the mode as "rb" (read binary).
+
 Read the contents of the file using the read() function. 
+
 Process the content of the .bff file according to its file structure and format. The specific steps will depend on the structure and purpose of the .bff file. 
 ## Classes identify
 Block identify: A single Block class is identified by define the reflect, opaque and refract of the blocks 
