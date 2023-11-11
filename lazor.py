@@ -129,4 +129,6 @@ def initialize_board (org_grid, available_slots, perm):
     return new_grid
 
 if __name__ == "__main__":
-    pass
+   # Test the solve function with one of the files
+   file_path = 'showstopper_4.bff'
+   solve(file_path)
