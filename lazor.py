@@ -1,6 +1,7 @@
 '''
 This is the main code that solves any given board in .bff file
 '''
+# this is a test
 def shoot_laser(grid, lasers):
     '''
     Shoot laser through the completed grid with blocks, and
