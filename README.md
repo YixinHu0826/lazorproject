@@ -1,5 +1,5 @@
 # Introduction
-In this assignment, our groups are going to  write a program that automatically finds solutions to the "Lazors'' game on Android and iPhone. It includes representing the game board and its elements, choosing a search algorithm, defining actions, implementing the logic to check for a solution and using GitHub to collaborate with group members.
+In this assignment, our group is going to write a program that automatically finds solutions to the "Lazors'' game on Android and iPhone. It includes representing the game board and its elements, choosing a search algorithm, defining actions, implementing the logic to check for a solution and using GitHub to collaborate with group members.
 
 ## Lazors
 The "Lazors" game is a puzzle game in which the objective is to manipulate blocks in order to guide laser beams to hit specific target points on a game board.  The game typically consists of a square grid-like board with different types of blocks, such as reflective blocks, opaque blocks, and refractive blocks, placed in various positions.
