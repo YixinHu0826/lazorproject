@@ -243,77 +243,77 @@ class Game:
 
 # Now we'll define the parser function to read from the .bff file and create a game instance
 def parse_bff(file_path):
-   """
-   Parses a .bff file and creates a game instance.
+    """
+    Parses a .bff file and creates a game instance.
 
-   Arguments:
-   - file_path (str): The path of the .bff file.
+    Arguments:
+    - file_path (str): The path of the .bff file.
 
-   Returns:
-   - game (Game): The game instance created from the .bff file.
+    Returns:
+    - game (Game): The game instance created from the .bff file.
 
-   Example:
-   >> game_instance = parse_bff('showstopper_4.bff')
-   """
+    Example:
+    >> game_instance = parse_bff('showstopper_4.bff')
+    """
 
-       grid_data = [] # To store raw grid data from the file
-       blocks = ['A', 'B', 'C'] # Valid block types
-       available_blocks = [] # To store the types and counts of available block
-       lasers = [] # To store laser objects
-       points = [] # To store points that lasers need to intersect
+    grid_data = [] # To store raw grid data from the file
+    blocks = ['A', 'B', 'C'] # Valid block types
+    available_blocks = [] # To store the types and counts of available block
+    lasers = [] # To store laser objects
+    points = [] # To store points that lasers need to intersect
 
-       with open(file_path, 'r') as file:
-           content = file.readlines()
+    with open(file_path, 'r') as file:
+        content = file.readlines()
 
-       reading_grid = False
-       for line in content:
-           line = line.strip()
-           print(line)
-           if line.startswith('#') or not line:
+    reading_grid = False
+    for line in content:
+        line = line.strip()
+        print(line)
+        if line.startswith('#') or not line:
                # This is a comment or empty line, skip it
-               continue
-           elif line == 'GRID START':
-               reading_grid = True
-           elif line == 'GRID STOP':
-               reading_grid = False
-           elif reading_grid:
-               line = line.replace(" ", "") #Remove spaces for grid data
-               grid_data.append(line)
-           elif line[0] in blocks:
-               # This line indicates the number of a specific type of block
-               try:
-                   block_type, count = line.split()
-                   available_blocks.extend([block_type for _ in range(int(count))])
-               except ValueError:
-                   raise ValueError(f"Invalid block line: {line}")
-           elif line.startswith('L'):
-               # This line defines a laser
-               try:
-                   _, x, y, vx, vy = line.split()
-                   lasers.append(Laser((int(x), int(y)), (int(vx), int(vy))))
-               except ValueError:
-                   raise ValueError(f"Invalid laser line: {line}")
-           elif line.startswith('P'):
-               # This line defines a point
-               try:
-                   _, x, y = line.split()
-                   points.append((int(x), int(y)))
-               except ValueError:
-                   raise ValueError(f"Invalid point line: {line}")
-       if not grid_data:
-           raise ValueError("No grid data found in the file")
+            continue
+        elif line == 'GRID START':
+            reading_grid = True
+        elif line == 'GRID STOP':
+            reading_grid = False
+        elif reading_grid:
+            line = line.replace(" ", "") #Remove spaces for grid data
+            grid_data.append(line)
+        elif line[0] in blocks:
+            # This line indicates the number of a specific type of block
+            try:
+                block_type, count = line.split()
+                available_blocks.extend([block_type for _ in range(int(count))])
+            except ValueError:
+                raise ValueError(f"Invalid block line: {line}")
+        elif line.startswith('L'):
+            # This line defines a laser
+            try:
+                _, x, y, vx, vy = line.split()
+                lasers.append(Laser((int(x), int(y)), (int(vx), int(vy))))
+            except ValueError:
+                raise ValueError(f"Invalid laser line: {line}")
+        elif line.startswith('P'):
+            # This line defines a point
+            try:
+                _, x, y = line.split()
+                points.append((int(x), int(y)))
+            except ValueError:
+                raise ValueError(f"Invalid point line: {line}")
+    if not grid_data:
+        raise ValueError("No grid data found in the file")
 
-       rows = len(grid_data)
-       cols = len(grid_data[0])
-       grid_array = [[0 for i in range(cols)] for j in range(rows)]
+    rows = len(grid_data)
+    cols = len(grid_data[0])
+    grid_array = [[0 for i in range(cols)] for j in range(rows)]
 
-      #Convert raw grid data to a 2D grid array
-       for i, line in enumerate(grid_data):
-           for j in range(cols):
-               grid_array[i][j] = line[j:j + 1]
-       block_object = Blocks(available_blocks)
-       game = Game(grid_array, block_object, lasers, points)
-       return game
+    #Convert raw grid data to a 2D grid array
+    for i, line in enumerate(grid_data):
+        for j in range(cols):
+            grid_array[i][j] = line[j:j + 1]
+    block_object = Blocks(available_blocks)
+    game = Game(grid_array, block_object, lasers, points)
+    return game
 
 
 def place_blocks(available_slots, blocks):
