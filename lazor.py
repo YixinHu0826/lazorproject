@@ -100,7 +100,7 @@ def shoot_laser(grid, lasers):
 
 def check(curr_pos, grid):
     '''
-    Check if the point is out of bounds
+    Check if a given point is out of bounds
     '''
     rows = len(grid)*2
     cols = len(grid[0])*2
