@@ -4,12 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="6b951d5e-0b8d-4d1d-8346-42104d50867a" name="Changes" comment="" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="7451e5d7-b892-42fc-9bb3-c068db7ddccc" name="Changes" comment="" />
+=======
+    <list default="true" id="6b951d5e-0b8d-4d1d-8346-42104d50867a" name="Changes" comment="" />
+>>>>>>> 056e92208637b6abcec96ceb963cac67fd9d4f71
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< Updated upstream
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2Y2hEVEYJ323ZmDSr2hZ8HLH1HD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;lazor-comment&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b951d5e-0b8d-4d1d-8346-42104d50867a" name="Changes" comment="" />
+      <created>1699729471902</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream
+=======
+      <updated>1699730095712</updated>
+      <workItem from="1699730107810" duration="838000" />
+=======
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -44,19 +95,33 @@
       <created>1699729471902</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+>>>>>>> Stashed changes
       <updated>1699729471902</updated>
       <workItem from="1699729480332" duration="31000" />
       <workItem from="1699730038782" duration="865000" />
       <workItem from="1699730915396" duration="59000" />
       <workItem from="1699731004243" duration="25000" />
       <workItem from="1699731112239" duration="14000" />
+<<<<<<< Updated upstream
+=======
+>>>>>>> 056e92208637b6abcec96ceb963cac67fd9d4f71
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< Updated upstream
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/lazorproject$lazor.coverage" NAME="lazor Coverage Results" MODIFIED="1699729506944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
+=======
+<<<<<<< HEAD
+=======
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/lazorproject$lazor.coverage" NAME="lazor Coverage Results" MODIFIED="1699729506944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+>>>>>>> 056e92208637b6abcec96ceb963cac67fd9d4f71
+>>>>>>> Stashed changes
 </project>

@@ -380,6 +380,19 @@ def shoot_laser(grid, lasers):
     '''
     Shoot laser through the completed grid with blocks, and
     retain all the points that the laser passes through
+
+    Arguments:
+   - grid (list): The grid of the game.
+   - lasers (list): The lasers in the game.
+
+   Returns:
+   - passed_points (list): List of points that the lasers pass through.
+
+   Example:
+   >> grid = [[0, 'A', 0], ['B', 0, 'C']]
+   >> lasers = [Laser((1, 2), (1, -1)), Laser((3, 4), (0, -1))]
+   >> shoot_laser(grid, lasers)
+   [(2, 0), (2, 2)]
     '''
     passed_points = []
 
@@ -474,19 +487,65 @@ def shoot_laser(grid, lasers):
 
 def check(curr_pos, grid):
     '''
+<<<<<<< Updated upstream
     Check if a given point is out of bounds
+=======
+<<<<<<< HEAD
+    Checks if the current position is within the bounds of the grid.
+
+   Arguments:
+   - curr_pos (tuple): The current position as a tuple (x, y).
+   - grid (list): The grid of the game.
+
+   Returns:
+   - in_bounds (bool): True if the position is within bounds, False otherwise.
+
+   Example:
+   >> grid = [[0, 'A', 0], ['B', 0, 'C']]
+   >> check((2, 0), grid)
+   True
+   >> check((3, 0), grid)
+   False
+=======
+    Check if a given point is out of bounds
+>>>>>>> 056e92208637b6abcec96ceb963cac67fd9d4f71
+>>>>>>> Stashed changes
     '''
+    # Calculate the total number of rows and columns based on the grid
     rows = len(grid)*2
     cols = len(grid[0])*2
+
+    # Check if the current position is within the calculated bounds
     if curr_pos[1]>rows or curr_pos[0]>cols:
         return False
+
     if curr_pos[1]<0 or curr_pos[0]<0:
         return False
+
     return True
 
 def check_solution(passed_points, required_points):
     '''
     Check if the current solution contains all points required
+
+    Arguments:
+   - passed_points (list): List of points that the lasers have passed through.
+   - required_points (list): List of points that the lasers need to intersect.
+
+
+   Returns:
+   - solution_found (bool): True if the solution is found, False otherwise.
+
+
+   Example:
+   >> passed_points = [(0, 1), (1, 1), (2, 1), (2, 2)]
+   >> required_points = [(0, 1), (1, 1), (2, 2)]
+   >> check_solution(passed_points, required_points)
+   True
+   >> required_points = [(0, 1), (2, 2), (3, 3)]
+   >> check_solution(passed_points, required_points)
+   False
+
     '''
     for point in required_points:
         if point not in passed_points:
@@ -495,12 +554,67 @@ def check_solution(passed_points, required_points):
 
 def initialize_board (org_grid, available_slots, perm):
     '''
-    Put value of permutation onto original board
+    Initializes the board with the given permutation of block placements.
+
+
+   Arguments:
+   - org_grid (list): The original grid of the game.
+   - available_slots (list): List of available slots on the grid.
+   - perm (list): Permutation of block placements.
+
+
+   Returns:
+   - new_grid (list): The new grid with the block placements.
+
+
+   Example:
+   >> org_grid = [[0, 'A', 0], ['B', 0, 'C']]
+   >> available_slots = [(0, 0), (0, 2), (1, 1)]
+   >> perm = ['A', 'B', 'C']
+   >> new_grid = initialize_board(org_grid, available_slots, perm)
+   >> new_grid
+   [['A', 'A', 'B'], ['B', 'C', 'C']]
+
     '''
     new_grid = org_grid
     for i, slot in enumerate(available_slots):
         new_grid [slot[0]][slot[1]] = perm [i]
     return new_grid
+def solve(file_path):
+   """
+   Solves a game by creating a game instance from the given file and finding a solution.
+
+   Arguments:
+   - file_path (str): The path of the .bff file.
+
+   Example:
+   >> solve('showstopper_4.bff')
+   """
+
+   #Parse the .bff file to create a game instance
+   new_game = parse_bff(file_path)
+   grid = new_game.get_grid()
+   slots_available = find_all_placements(grid)
+   blocks = new_game.get_blocks()
+   all_permutations = place_blocks(slots_available, blocks)
+   lasers = new_game.get_lasers()
+   target_points = new_game.get_points()
+
+   #Iterate through all permutation and test each one
+   for perm in all_permutations:
+       test_grid = initialize_board(grid, slots_available, perm)
+       test_points = shoot_laser(test_grid, lasers)
+
+       #Check if the current solution matches the target points
+       if check_solution(test_points, target_points):
+           print('Solution found')
+           print(test_grid)
+           return
+
+   print('No solution found')
+   return
 
 if __name__ == "__main__":
-    pass
+    # Test the solve function with one of the files
+    file_path = 'showstopper_4.bff'
+    solve(file_path)
