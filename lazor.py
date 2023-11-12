@@ -500,20 +500,19 @@ def check(curr_pos, grid):
     '''
     Checks if the current position is within the bounds of the grid.
 
-   Arguments:
-   - curr_pos (tuple): The current position as a tuple (x, y).
-   - grid (list): The grid of the game.
+    Arguments:
+    - curr_pos (tuple): The current position as a tuple (x, y).
+    - grid (list): The grid of the game.
 
-   Returns:
-   - in_bounds (bool): True if the position is within bounds, False otherwise.
+    Returns:
+    - in_bounds (bool): True if the position is within bounds, False otherwise.
 
-   Example:
-   >> grid = [[0, 'A', 0], ['B', 0, 'C']]
-   >> check((2, 0), grid)
-   True
-   >> check((3, 0), grid)
-   False
->>>>>>> Stashed changes
+    Example:
+    >> grid = [[0, 'A', 0], ['B', 0, 'C']]
+    >> check((2, 0), grid)
+    True
+    >> check((3, 0), grid)
+    False
     '''
     # Calculate the total number of rows and columns based on the grid
     rows = len(grid)*2
