@@ -1,4 +1,5 @@
 from sympy.utilities.iterables import multiset_permutations
+import unittest
 
 
 # Define the basic classes first
