@@ -590,16 +590,17 @@ def initialize_board(org_grid, available_slots, perm):
 
 def solve(file_path):
     """
-    Solves game by creating a game instance from the
-    given file and finding a solution.
+   Solves a game by creating a game instance from the given file,
+   finding a solution, and saving it to a new .bff file.
 
-    Arguments:
-    - file_path (str): The path of the .bff file.
 
-    Example:
-    >> solve('showstopper_4.bff')
+   Arguments:
+   - file_path (str): The path of the .bff file.
+
+
+   Example:
+   >> solve('showstopper_4.bff')
     """
-
     # Parse the .bff file to create a game instance
     new_game = parse_bff(file_path)
     grid = new_game.get_grid()
@@ -609,19 +610,26 @@ def solve(file_path):
     lasers = new_game.get_lasers()
     target_points = new_game.get_points()
 
-    # Iterate through all permutation and test each one
+    # Iterate through all permutations and test each one
     for perm in all_permutations:
         test_grid = initialize_board(grid, slots_available, perm)
         test_points = shoot_laser(test_grid, lasers)
 
-        # Check if the current solution matches the target points
+    # Check if the current solution matches the target points
         if check_solution(test_points, target_points):
-            print('Solution found')
-            print(test_grid)
+            # Create the solution filenamepycodestyle lazor.py
+            solution_file = f"solution_{file_path}"
+        # Save the solution to the solution file
+            with open(solution_file, "w") as file:
+                file.write("GRID START\n")
+                for row in test_grid:
+                    # Convert each row of the grid back to a string with spaces
+                    file.write(" ".join(map(str, row)) + "\n")
+                file.write("GRID STOP\n")
+            print(f"Solution found! Solution saved to {solution_file}")
             return
 
-    print('No solution found')
-    return
+    print("No solution found")
 
 
 class TestLazorProject (unittest.TestCase):
