@@ -624,7 +624,198 @@ def solve(file_path):
     return
 
 
+class TestLazorProject (unittest.TestCase):
+    """
+    Performs unit tests for all functions in this project
+
+    Args:
+        unittest (TestCase): uses the unittest module in Python
+    """
+    def setUp(self):
+        self.grid = [['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o'],
+                     ['o', 'o', 'o', 'o'], ['o', 'o', 'o', 'o']]
+        self.blocks = Blocks(['A', 'A', 'C'])
+        self.laser = Laser((3, 4), (1, -1))
+        self.laser2 = Laser((2, 7), (1, -1))
+        self.lasers = [self.laser2]
+        self.points = [(3, 0), (4, 3), (2, 5), (4, 7)]
+        self.game = Game(self.grid, self.blocks, self.lasers, self.points)
+
+    def test_get_reflect(self):
+        """
+        Tests the get_reflect() function within class 'Blocks'
+        """
+        self.assertEqual(self.blocks.get_reflect(), 2,
+                         'The get_reflect function is wrong')
+
+    def test_get_opaque(self):
+        """
+        Tests the get_opaque() function within class 'Blocks'
+        """
+        self.assertEqual(self.blocks.get_opaque(), 0,
+                         'The get_opaque function is wrong')
+
+    def test_get_refract(self):
+        """
+        Tests the get_reflect() function within class 'Blocks'
+        """
+        self.assertEqual(self.blocks.get_refract(), 1,
+                         'The get_refract function is wrong')
+
+    def test_get_position(self):
+        """
+        Tests the get_position() function within class 'Laser'
+        """
+        self.assertEqual(self.laser.get_position(), (3, 4),
+                         'The get_position function is wrong')
+
+    def test_get_direction(self):
+        """
+        Tests the get_direction() function within class 'Laser'
+        """
+        self.assertEqual(self.laser.get_direction(), (1, -1),
+                         'The get_direction function is wrong')
+
+    def test_change_position(self):
+        """
+        Tests the change_position() function within class 'Laser'
+        """
+        self.laser.change_position((4, 5))
+        self.assertEqual(self.laser.get_position(), (4, 5),
+                         'The change_position function is wrong')
+
+    def test_change_direction(self):
+        """
+        Tests the change_direction() function within class 'Laser'
+        """
+        self.laser.change_direction((1, 1))
+        self.assertEqual(self.laser.get_direction(), (1, 1),
+                         'The change_direction function is wrong')
+
+    def test_get_grid(self):
+        """
+        Tests the get_grid() function within class 'Game'
+        """
+        correct_grid = self.grid
+        self.assertEqual(self.game.get_grid(), correct_grid,
+                         'The get_grid function is wrong')
+
+    def test_get_blocks(self):
+        """
+        Tests the get_blocks() function within class 'Game'
+        """
+        correct_blocks = self.blocks
+        self.assertEqual(self.game.get_blocks(), correct_blocks,
+                         'The get_blocks function is wrong')
+
+    def test_get_lasers(self):
+        """
+        Tests the get_lasers() function within class 'Game'
+        """
+        correct_lasers = self.lasers
+        self.assertEqual(self.game.get_lasers(), correct_lasers,
+                         'The get_lasers function is wrong')
+
+    def test_get_points(self):
+        """
+        Tests the get_points() function within class 'Game'
+        """
+        correct_points = self.points
+        self.assertEqual(self.game.get_points(), correct_points,
+                         'The get_points function is wrong')
+
+    def test_parse_bff(self):
+        """
+        Tests the parse_bff(file_path) function
+        """
+        test_file_path = 'mad_1.bff'
+        self.assertIsInstance(parse_bff(test_file_path), Game,
+                              'The parse_bff function is wrong')
+
+    def test_place_blocks(self):
+        """
+        Tests the place_blocks(available_slots, blocks) function
+        """
+        test_slots = [(0, 0), (0, 1), (0, 2)]
+        test_perms = place_blocks(test_slots, self.blocks)
+        self.assertIn(['A', 'A', 'C'], test_perms)
+        self.assertIn(['A', 'C', 'A'], test_perms)
+        self.assertEqual(len(test_perms), 3,
+                         'The place_blocks function is wrong')
+
+    def test_find_all_placements(self):
+        """
+        Test the find_all_placements(grid) function
+        """
+        test_grid = [['o', 'B', 'o'],
+                     ['A', 'x', 'o'],
+                     ['C', 'o', 'o']]
+        correct_result = [(0, 0), (0, 2), (1, 2), (2, 1), (2, 2)]
+        self.assertEqual(find_all_placements(test_grid), correct_result,
+                         'The find_all_placement funcion is wrong')
+
+    def test_shoot_laser(self):
+        """
+        Test the shoot_laser(grid, lasers) function
+        """
+        test_grid = [['o', 'B', 'o'],
+                     ['A', 'x', 'o'],
+                     ['C', 'o', 'o']]
+        test_laser_1 = Laser((4, 3), (-1, -1))
+        correct_points_1 = [(3, 2)]
+        self.assertEqual(shoot_laser(test_grid, [test_laser_1]),
+                         correct_points_1,
+                         'The shoot_laser method is wrong')
+        test_laser_2 = Laser((3, 4), (-1, -1))
+        correct_points_2 = [(2, 3), (3, 2)]
+        self.assertEqual(shoot_laser(test_grid, [test_laser_2]),
+                         correct_points_2,
+                         'The shoot laser method is wrong')
+        test_laser_3 = Laser((3, 4), (-1, 1))
+        correct_points_3 = [(2, 5), (1, 6), (3, 6)]
+        self.assertEqual(shoot_laser(test_grid, [test_laser_3]),
+                         correct_points_3,
+                         'The shoot_laser method is wrong')
+
+    def test_check(self):
+        """
+        Test the check(curr_pos, grid) function
+        """
+        self.assertTrue(check((2, 0), self.grid),
+                        'The function cannot detect a point on the grid')
+        self.assertFalse(check((-1, 0), self.grid),
+                         'The function cannot detect a point not on the grid')
+        self.assertFalse(check((9, 5), self.grid),
+                         'The function cannot detect a point not on the grid')
+
+    def test_check_soluition(self):
+        """
+        Test the check_solution(passed_points, required_points) function
+        """
+        points_1 = [(3, 0), (4, 3), (2, 5), (4, 7), (1, -1)]
+        points_2 = [(3, 0), (4, 2), (1, 8), (9, 7)]
+        self.assertTrue(check_solution(points_1, self.points),
+                        'The check_solution function is wrong')
+        self.assertFalse(check_solution(points_2, self.points),
+                         'The check_solution function is wrong')
+
+    def test_initialize_board(self):
+        """
+        Test the initialize_board(org_grid, available_slots, perm) function
+        """
+        test_slots = [(0, 0), (0, 3), (1, 3), (2, 1)]
+        test_perm = ['A', 'C', 'B', 'A']
+        correct_grid = [['A', 'o', 'o', 'C'],
+                        ['o', 'o', 'o', 'B'],
+                        ['o', 'A', 'o', 'o'],
+                        ['o', 'o', 'o', 'o']]
+        self.assertEqual(initialize_board(self.grid, test_slots, test_perm),
+                         correct_grid,
+                         'The initialize_board function is wrong')
+
+
 if __name__ == "__main__":
     # Test the solve function with one of the files
     file_path = 'showstopper_4.bff'
     solve(file_path)
+    unittest.main()
